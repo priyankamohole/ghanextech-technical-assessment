@@ -1,172 +1,176 @@
-# 🤖 Smart AI Assistant with Tool Calling
+# Smart AI Assistant with Tool Calling
 
-An intelligent conversational AI agent built using Python,
-LangChain, Groq and Streamlit.
+## Project Overview
 
-The agent understands user queries and dynamically invokes
-external tools to perform calculations, retrieve live weather
-information and search the web.
+Smart AI Assistant is an interactive AI-powered chatbot built using Python, Streamlit, LangChain, and Groq LLM. It can understand user queries, maintain conversational context, and dynamically select external tools to perform tasks.
+
+Instead of generating every answer directly, the AI agent decides when to use tools such as a calculator, weather service, or web search to provide useful responses.
 
 ## Features
 
-- Conversational chat interface
-- Multi-turn conversation memory
-- LLM-based tool selection
-- Calculator tool
-- Real-time weather tool
-- Web search tool
-- Multiple tool execution
-- Structured tool input schemas
-- Exception handling
-- Interactive Streamlit interface
+- Interactive chat interface built with Streamlit.
+- Conversational memory to maintain chat context.
+- Dynamic tool selection based on user queries.
+- Calculator for mathematical operations.
+- Weather tool for retrieving current weather information.
+- Web search for retrieving relevant information from the internet.
+- Error handling for failed tool executions.
+- Modular and reusable project architecture.
+- Environment variable configuration for API keys.
 
 ## Technology Stack
 
-- Python
-- Streamlit
-- LangChain
-- LangGraph
-- Groq LLM
-- Open-Meteo API
-- DuckDuckGo Search
-- Pydantic
-- Requests
+| Technology | Purpose                    |
+| ---------- | -------------------------- |
+| Python     | Backend development        |
+| Streamlit  | User interface             |
+| LangChain  | Agent and tool integration |
+| LangGraph  | Conversation memory        |
+| Groq API   | Large Language Model       |
+| Pydantic   | Input validation           |
+| Open-Meteo | Weather information        |
+| DDGS       | Web search                 |
+| Requests   | HTTP requests              |
 
-## Architecture
-
-User Query
-|
-v
-Streamlit Interface
-|
-v
-LangChain AI Agent
-|
-v
-LLM Intent Analysis
-|
-+---- Direct Response
-|
-+---- Calculator Tool
-|
-+---- Weather Tool
-|
-+---- Web Search Tool
-|
-v
-Tool Execution
-|
-v
-LLM Response Synthesis
-|
-v
-Final Response
-
-## Tools
+## Available Tools
 
 ### 1. Calculator
 
-Performs safe mathematical calculations.
-
-Input:
-
-- expression: string
+- Performs mathematical calculations.
+- Supports arithmetic operations and selected mathematical functions.
+- Uses safe expression parsing instead of Python `eval()`.
 
 ### 2. Weather
 
-Fetches current weather information using Open-Meteo.
-
-Input:
-
-- city: string
+- Retrieves current weather information for a specified city.
+- Provides temperature, humidity, wind speed, and weather conditions.
+- Uses the Open-Meteo API.
 
 ### 3. Web Search
 
-Searches the internet using DuckDuckGo.
+- Searches the internet for relevant information.
+- Returns search results with titles, descriptions, and links.
+- Uses the DDGS library.
 
-Input:
+## Project Structure
 
-- query: string
+```text
+TASK-02-AI-AGENT/
+│
+├── app.py
+├── requirements.txt
+├── .env
+├── .env.example
+├── .gitignore
+│
+├── agent/
+│   ├── __init__.py
+│   └── agent.py
+│
+├── tools/
+│   ├── __init__.py
+│   ├── calculator.py
+│   ├── weather.py
+│   └── web_search.py
+│
+├── config/
+│   ├── __init__.py
+│   └── settings.py
+│
+└── utils/
+    ├── __init__.py
+    └── memory.py
+```
 
-## Example Prompts
+## Agent Workflow
 
-Direct response:
+1. User enters a query through the Streamlit chat interface.
+2. The query is passed to the LangChain AI agent.
+3. The LLM analyzes the query and determines whether a tool is required.
+4. The agent selects and executes the appropriate tool.
+5. The tool returns its result to the agent.
+6. The LLM generates a final response using the tool output.
+7. Conversation history is maintained using LangGraph checkpointing.
 
-- Hello!
-- Explain artificial intelligence.
+## Installation and Setup
 
-Calculator:
+### 1. Clone the repository
 
-- Calculate 450 \* 25.
-- What is the square root of 625?
+```bash
+git clone YOUR_REPOSITORY_URL
+cd TASK-02-AI-AGENT
+```
 
-Weather:
+### 2. Create a virtual environment
 
-- What is the weather in Pune?
-
-Web Search:
-
-- Search for Python interview questions.
-
-Multiple tools:
-
-- Find the weather in Pune and calculate
-  25% of 800.
-
-## Installation
-
-1. Clone the repository.
-
-git clone YOUR_GITHUB_REPOSITORY_URL
-
-2. Navigate to the project.
-
-cd ai-tool-calling-agent
-
-3. Create a virtual environment.
-
+```bash
 python -m venv .venv
+```
 
-4. Activate the environment.
+Activate it:
 
-Linux/Mac:
+**Linux/macOS**
+
+```bash
 source .venv/bin/activate
+```
 
-Windows:
+**Windows**
+
+```bash
 .venv\Scripts\activate
+```
 
-5. Install dependencies.
+### 3. Install dependencies
 
+```bash
 pip install -r requirements.txt
+```
 
-6. Configure environment variables.
+### 4. Configure environment variables
 
-Create a .env file and add:
+Create a `.env` file:
 
+```env
 GROQ_API_KEY=your_groq_api_key
 MODEL_NAME=openai/gpt-oss-20b
+```
 
-7. Start the application.
+Get your API key from [Groq Console](https://console.groq.com/keys).
 
+### 5. Run the application
+
+```bash
 streamlit run app.py
+```
+
+## Example Queries
+
+- Calculate 250 multiplied by 40.
+- What is the square root of 625?
+- What is the current weather in Pune?
+- Search for Python interview questions.
+- Find the weather in Mumbai and calculate 20% of 1500.
 
 ## Deployment
 
-The application can be deployed using
-Streamlit Community Cloud.
+The application can be deployed using Streamlit Community Cloud.
 
-Connect your GitHub repository and configure
-GROQ_API_KEY in the application's secrets.
+1. Push the project to a GitHub repository.
+2. Open [Streamlit Community Cloud](https://share.streamlit.io/).
+3. Connect your GitHub repository.
+4. Select `app.py` as the main application file.
+5. Add `GROQ_API_KEY` and `MODEL_NAME` under application secrets.
+6. Deploy the application.
 
 ## Future Improvements
 
-- Persistent conversation database
-- More external API integrations
-- Voice-based interaction
-- User authentication
-- Advanced agent monitoring
-- Streaming responses
+- Add more external tools and APIs.
+- Support document-based question answering.
+- Add persistent conversation storage.
+- Improve tool execution monitoring.
+- Add authentication and user-specific chat history.
 
 ## Author
 
-Developed as an AI Agent with Tool Calling assignment.
+Developed as a technical assessment project using Python, LangChain, Streamlit, and Groq.
