@@ -12,6 +12,7 @@ from config.settings import (
 from tools.calculator import calculator
 from tools.weather import get_weather
 from tools.web_search import web_search
+import streamlit as st
 
 
 SYSTEM_PROMPT = """
@@ -52,8 +53,9 @@ def create_ai_agent():
 
     llm = ChatGroq(
         model=MODEL_NAME,
+        api_key=GROQ_API_KEY,
         temperature=0,
-        api_key=GROQ_API_KEY
+        
     )
 
     tools = [
