@@ -1,17 +1,8 @@
-
 streamlit
 langchain
-langchain-core
-langchain-community
-langchain-text-splitters
 langchain-groq
-langchain-huggingface
-sentence-transformers
-# faiss-cpu
-pymupdf
+langgraph
 python-dotenv
-sentence-transformers
-pydantic
-plotly
-pandas
 requests
+ddgs
+pydantic

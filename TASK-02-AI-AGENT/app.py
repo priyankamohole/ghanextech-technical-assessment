@@ -5,6 +5,12 @@ from agent.agent import create_ai_agent
 from utils.memory import create_thread_id
 
 
+
+GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
+SERPER_API_KEY = st.secrets["SERPER_API_KEY"]
+GROQ_MODEL = st.secrets["GROQ_MODEL"]
+
+
 # ---------------- PAGE CONFIG ----------------
 
 st.set_page_config(
